@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
-import { json } from 'sequelize/types';
 import User from '../models/user';
 import userSchema from '../schemas/user';
+import { existEmail, existEditEmail } from '../functions/user';
+
 
 export const getUsers = async( req: Request , res: Response ) => {
 
@@ -32,19 +33,15 @@ export const postUser = async( req: Request , res: Response ) => {
     try {
         
         // Validate the request body using Joi's schema
-        const { error } = userSchema.validate(req.body);
+        const { error } = userSchema.validate(body);
         if (error) {
             // If there is a validation error, it returns a 400 error with the following error message
             return res.status(400).json({ message: error.details[0].message });
         }
 
-        const existEmail = await User.findOne({
-            where: {
-                email: body.email
-            }
-        });
+        const existEmailUser = await existEmail(body.email);
 
-        if (existEmail) {
+        if (existEmailUser) {
             return res.status(400).json({
                 msg: 'Ya existe un usuario con el email ' + body.email
             });
@@ -53,7 +50,7 @@ export const postUser = async( req: Request , res: Response ) => {
         const user = User.build(body);
         await user.save();
 
-        res.json( user );
+        res.json(user);
 
     } catch (error) {
 
@@ -71,10 +68,25 @@ export const putUser = async( req: Request , res: Response ) => {
 
     try {
         
+        // Validate the request body using Joi's schema
+        const { error } = userSchema.validate(body);
+        if (error) {
+            // If there is a validation error, it returns a 400 error with the following error message
+            return res.status(400).json({ message: error.details[0].message });
+        }
+        
         const user = await User.findByPk( id );
         if ( !user ) {
             return res.status(404).json({
                 msg: 'No existe un usuario con el id ' + id
+            });
+        }
+
+        const existUser = await existEditEmail(body.email, id);
+        
+        if( existUser ){
+            return res.status(400).json({
+                msg: 'Ya existe un usuario con el email ' + body.email
             });
         }
 
@@ -103,9 +115,8 @@ export const deleteUser = async( req: Request , res: Response ) => {
         });
     }
 
-    await user.update({ estado: false });
+    await user.update({ status: false });
 
     // await usuario.destroy();
     res.json(user);
 }
-
