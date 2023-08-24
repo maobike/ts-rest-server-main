@@ -1,9 +1,9 @@
 import { Sequelize } from 'sequelize';
 
 
-const db = new Sequelize('btw', 'root', 'root', {
+const db = new Sequelize('user_development', 'postgres', 'root', {
     host: 'localhost',
-    dialect: 'mysql',
+    dialect: 'postgres',
     logging: console.log, // Mostrar las consultas en consola
 });
 
