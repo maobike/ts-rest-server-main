@@ -29,7 +29,7 @@ CREATE TABLE public.users (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
     email character varying(255) NOT NULL,
-    password character varying(255) NOT NULL,
+    password character varying(255),
     phone character varying(255),
     status boolean DEFAULT true NOT NULL,
     "createdAt" timestamp with time zone,

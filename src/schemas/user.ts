@@ -21,12 +21,9 @@ const userSchema = Joi.object({
 
     password: Joi.string()
         .max(100)
-        .required()
         .messages({
             'string.max': 'La contraseña no debe tener más de {#limit} caracteres',
-            'any.required': 'La contraseña es requerida',
         }),
-
 
     phone: Joi.string()
         .max(12)
@@ -34,6 +31,12 @@ const userSchema = Joi.object({
         .messages({
             'string.max': 'El campo teléfono no debe tener más de 12 dígitos.',
             'any.required': 'El teléfono es requerido',
+        }),
+
+    status: Joi.boolean()
+        .required()
+        .messages({
+            'any.required': 'El estado es requerido',
         }),
 });
 
