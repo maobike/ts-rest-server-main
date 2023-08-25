@@ -1,0 +1,35 @@
+version: '3'
+services:
+  db:
+    container_name: db-postgres
+    image: postgres
+    ports:
+      - '5432:${DB_PORT}'
+    volumes:
+      - data:/data/db
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+    networks:
+      - mynetwork
+
+  api:
+    container_name: ts-rest-server-nodejs
+    restart: always
+    build: .
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - db
+    volumes:
+      - .:/src/app
+    env_file:
+      - .env
+    networks:
+      - mynetwork
+
+volumes:
+  data: 
+networks:
+  mynetwork:
