@@ -63,6 +63,11 @@ class Server {
         })
     }
 
+    getApp(): Application {
+        return this.app;
+    }
 }
+
+const server = new Server();
 
 export default Server;

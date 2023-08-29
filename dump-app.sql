@@ -58,13 +58,13 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 INSERT INTO public.items VALUES (1, 'Item 1', 'Item de prueba #1', 2000, 10, '2023-08-24 04:20:12.285+00', '2023-08-24 04:20:12.285+00');
 INSERT INTO public.items VALUES (2, 'Item 2', 'Item de prueba #2', 5000, 2, '2023-08-24 04:20:40.336+00', '2023-08-24 04:20:40.336+00');
-INSERT INTO public.items VALUES (5, 'Item 3', 'Item de prueba #3', 5000, 2, '2023-08-24 13:23:35.248+00', '2023-08-24 13:23:35.248+00');
+INSERT INTO public.items VALUES (3, 'Item 3', 'Item de prueba #3', 5000, 2, '2023-08-24 13:23:35.248+00', '2023-08-24 13:23:35.248+00');
 
-INSERT INTO public.users VALUES (4, 'User prueba1', 'prueba1@gmail.com', '123456789', '123565456', true, NULL, NULL);
-INSERT INTO public.users VALUES (5, 'User prueba2', 'prueba2@gmail.com', '123456789', '123565456', true, NULL, NULL);
+INSERT INTO public.users VALUES (1, 'User prueba Uno', 'prueba1@gmail.com', '1a1b1c1d1e1f', '1111111111', true, NULL, NULL);
+INSERT INTO public.users VALUES (2, 'User prueba Dos', 'prueba2@gmail.com', '2a2b2c2d2e2f', '2222222222', true, NULL, NULL);
 
-SELECT pg_catalog.setval('public.items_id_seq', 5, true);
-SELECT pg_catalog.setval('public.users_id_seq', 34, true);
+SELECT pg_catalog.setval('public.items_id_seq', 3, true);
+SELECT pg_catalog.setval('public.users_id_seq', 2, true);
 
 ALTER TABLE ONLY public.items
     ADD CONSTRAINT items_pkey PRIMARY KEY (id);

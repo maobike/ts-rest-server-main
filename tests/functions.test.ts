@@ -26,15 +26,15 @@ describe('Functions Users', () => {
     describe('Function existEmail', () => {
         it('should return a email exist', async () => {
             req.body = {
-                name: 'User Example',
-                email: 'user@example.com',
-                password: 'password3',
-                phone: '123456789'
+                name: 'User prueba Uno',
+                email: 'prueba1@gmail.com',
+                password: '1a1b1c1d1e1f',
+                phone: '1111111111'
             };
             // Llama a la función postUser
             await postUser(req, res);
 
-            const email = 'user@example.com'
+            const email = 'prueba1@gmail.com'
             const resp = await existEmail(email);
 
             expect(resp).not.toBeNull();

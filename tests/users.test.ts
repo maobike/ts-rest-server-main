@@ -128,13 +128,20 @@ describe('UserController', () => {
       // Mock datos de solicitud con un correo electrónico que ya existe
       req.body = {
         name: 'User 5',
-        email: 'user5@example.com', // Suponiendo que este correo ya existe
+        email: 'prueba1@gmail.com', // Suponiendo que este correo ya existe
         password: 'password5',
         phone: '987654321',
+        status: true
       };
   
       // Mock para existEmail para simular que ya existe un usuario con el mismo correo
-      existEmailMock.mockResolvedValue({ /* Datos de usuario existente */ });
+      existEmailMock.mockResolvedValue({
+        name: 'User prueba Uno',
+        email: 'prueba1@gmail.com', // Suponiendo que este correo ya existe
+        password: '1a1b1c1d1e1f',
+        phone: '1111111111',
+        status: true
+      });
   
       // Llama a la función postUser
       await postUser(req, res);
@@ -216,6 +223,7 @@ describe('UserController', () => {
         email: 'updated@example.com',
         password: 'newPassword',
         phone: '987654321',
+        status: true
       };
   
       // Mock para existEditEmail para simular que no existe otro usuario con el mismo correo
@@ -238,6 +246,7 @@ describe('UserController', () => {
         email: 'user1@example.com', // Suponiendo que este correo ya existe para otro usuario
         password: 'newpassword',
         phone: '987654321',
+        status: true
       };
   
       // Mock para existEditEmail para simular que el correo electrónico ya existe para otro usuario
