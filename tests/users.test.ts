@@ -250,13 +250,14 @@ describe('UserController', () => {
       };
   
       // Mock para existEditEmail para simular que el correo electrónico ya existe para otro usuario
-      existEditEmailMock.mockResolvedValue(
+      existEmailMock.mockResolvedValue(
         {
           id: 1,
           name: 'Updated User',
           email: 'updated@example.com',
           password: 'newPassword',
           phone: '987654321',
+          status: true
         });
   
       // Mock User.findByPk() para devolver un usuario existente
@@ -266,6 +267,7 @@ describe('UserController', () => {
         email: 'user1@example.com',
         password: 'password1',
         phone: '123456789',
+        status: true
       });
       jest.spyOn(User, 'findByPk').mockResolvedValue(sampleUser);
   

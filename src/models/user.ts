@@ -1,9 +1,29 @@
-import { DataTypes } from 'sequelize';
-import db from '../db/connection';
+import { DataTypes, Model , Optional} from 'sequelize';
+import sequelizeConnection from '../db/connection'
 
-const User = db.define('User', {
+export interface UserAttributes {
+    id:        number;
+    name:      string;
+    email:     string;
+    password:  string;
+    phone:     string;
+    status:    boolean;
+}
+export interface UserInput extends Optional<UserAttributes, 'id' | 'status'> {}
+export interface UserOutput extends Required<UserAttributes> {}
+
+class User extends Model<UserAttributes, UserInput> implements UserAttributes {
+    public id!: number
+    public name!: string
+    public email!: string
+    public password!: string
+    public phone!: string
+    public status!: boolean
+}
+
+User.init({
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
     },
@@ -14,10 +34,10 @@ const User = db.define('User', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true, // Aquí se define como único
+        unique: true,
         validate: {
-          isEmail: true // También puedes agregar validaciones de formato de correo electrónico si lo deseas
-        }    
+            isEmail: true
+        }
     },
     password: {
         type: DataTypes.STRING,
@@ -29,16 +49,12 @@ const User = db.define('User', {
     status: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: 1 // Valor por defecto
-    },
-}, 
-    {
-        tableName: 'users',
-        timestamps: true // Agregar createdAt y updatedAt automáticamente
+        defaultValue: true
     }
-);
-
-
-
+}, {
+    timestamps: true, // Habilita la gestión automática de createdAt y updatedAt    
+    sequelize: sequelizeConnection, // Instancia de Sequelize
+    modelName: 'User', // Nombre del modelo
+});
 
 export default User;

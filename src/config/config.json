@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "postgres",
+    "username": "root",
     "password": "root",
-    "database": "user_development",
+    "database": "btw",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "mysql"
   },
   "test": {
-    "username": "postgres",
+    "username": "root",
     "password": "root",
-    "database": "user_test",
+    "database": "btw",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "mysql"
   },
   "production": {
-    "username": "postgres",
+    "username": "root",
     "password": "root",
-    "database": "user_production",
+    "database": "btw",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "mysql"
   }
 }

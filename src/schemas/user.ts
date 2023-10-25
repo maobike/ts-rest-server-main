@@ -34,7 +34,7 @@ const userSchema = Joi.object({
         }),
 
     status: Joi.boolean()
-        .required()
+        .default(true)
         .messages({
             'any.required': 'El estado es requerido',
         }),
