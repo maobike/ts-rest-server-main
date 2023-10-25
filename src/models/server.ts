@@ -32,8 +32,10 @@ class Server {
             await db.authenticate();
             console.log('Database online');
 
-        } catch (error : any) {
-            throw new Error( error );
+        } catch (error : unknown) {
+            if (typeof error === "string") {
+                throw new Error(error as string);
+            }
         }
 
     }
@@ -67,7 +69,5 @@ class Server {
         return this.app;
     }
 }
-
-const server = new Server();
 
 export default Server;

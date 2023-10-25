@@ -1,4 +1,3 @@
-import db from '../db/connection';
 import { DataTypes, Model , Optional} from 'sequelize';
 import sequelizeConnection from '../db/connection'
 

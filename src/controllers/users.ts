@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import User from '../models/user';
 import userSchema from '../schemas/user';
-import { existEmail } from '../functions/user';
+import { existEditEmail, existEmail } from '../functions/user';
 
 export const getUsers = async( req: Request , res: Response ) => {
 
@@ -81,8 +81,10 @@ export const putUser = async( req: Request , res: Response ) => {
             });
         }
 
-        const dataUser = await existEmail(body.email);
-        if( dataUser && dataUser.id !== parseInt(id) ){
+        const dataUser = await existEditEmail(body.email, parseInt(id));
+        //const dataUser = await existEmail(body.email);
+        //if( dataUser && dataUser.id !== parseInt(id) ){
+        if( dataUser ){
             return res.status(400).json({
                 msg: 'Ya existe un usuario con el email ' + body.email
             });

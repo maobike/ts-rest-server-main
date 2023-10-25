@@ -15,7 +15,7 @@ export const existEmail = async( email: string ) => {
     }
 }
 
-export const existEditEmail = async( email: string, id: any ) => {
+export const existEditEmail = async( email: string, id: number ) => {
     try {
         const user = await User.findOne({
             where: {
