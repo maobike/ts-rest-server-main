@@ -1,4 +1,5 @@
 import express, { Application } from 'express';
+import authRoutes from '../routes/auth';
 import userRoutes from '../routes/user';
 import itemRoutes from '../routes/item';
 import cors from 'cors';
@@ -11,6 +12,7 @@ class Server {
     private app: Application;
     private port: string;
     private apiPaths = {
+        auth: '/api/auth',
         users: '/api/users',
         items: '/api/items'
     }
@@ -54,6 +56,7 @@ class Server {
 
 
     routes() {
+        this.app.use( this.apiPaths.auth,  authRoutes )
         this.app.use( this.apiPaths.users, userRoutes )
         this.app.use( this.apiPaths.items, itemRoutes )
     }
